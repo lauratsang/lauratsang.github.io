@@ -73,6 +73,15 @@
           }
           return results
         }
+        length() {
+          let curr = this
+          const results = []
+          while (curr) {
+            results.push(curr.value)
+            curr = curr.next
+          }
+          return results.length
+        }
       }
     </script>
   </head>
@@ -81,6 +90,7 @@
     <div>
       WASD or ARROW KEYS to move. any other key to reset
     </div>
+    <div id="score"> Score: 0 </div>
     <canvas id="game-canvas"></canvas>
     <div>
       (DESKTOP ONLY)
@@ -97,6 +107,7 @@
         DOWN: new V2(0, 1),
       }
       const N_APPLES = 3
+      const HIGHSCORE = 0
 
       // set the canvas to SIZE width and height
       const canvas = document.querySelector('#game-canvas')
@@ -108,6 +119,8 @@
         BACKGROUND: '#000000',
         SNAKE: '#34eb7d',
         APPLE: '#ff0000',
+        DOUBLE_APPLE: '#FEFF00',
+        HALF_APPLE: '#8100FF',
       }
 
       // Pixel: a drawable position
@@ -137,12 +150,25 @@
         // a new head is added to the front (in input direction)
         // if the snake isn't growing, the last node is removed
         const new_head = new ListNode(new Pixel(head.value.x + dir.x, head.value.y + dir.y, head.color), head)
-        if (!do_grow) {
-          let curr = head
+        let new_growth = growth
+        if (growth > 0) {
+          new_growth--
+        } else if (growth === 0) {
+          let curr = new_head
           while (curr.next.next) curr = curr.next
           curr.next = undefined
+        } else if (growth < 0) { // define condition explicilty for readability
+          let curr = new_head
+          let seen = 1
+          let desired_length = snake_length(head) + growth
+          while (seen != desired_length) {
+            curr = curr.next
+            seen += 1
+          }
+          curr.next = undefined
+          new_growth = 0
         }
-        return new_head
+        return [new_head, new_growth]
       }
       function snake_intersects(head, position) {
         // true if any body parts are placed at the position
@@ -161,6 +187,20 @@
         return false
       }
 
+      function snake_length(head) {
+        return head.length()
+      }
+      
+      function display_score() {
+        document.getElementById('score').innerText = "Score: " + score;
+      }
+
+      function save_high_score() {
+        if (score > highscore) {
+          localStorage.setItem('', String(score))
+        }
+      }
+
       // === GAME STATE ===
       // start the snake heading towards the right
       let head = new ListNode(new Pixel(SIZE/4, SIZE/2, COLORS.SNAKE))
@@ -174,6 +214,8 @@
       let gameover = false
       // last is used to avoid letting the snake do a 180
       let last = direction
+      // score
+      let score = 0
 
       // === GAME LOOP ===
       function loop() {
@@ -184,8 +226,7 @@
 
         // move the snake
         // gameover if snake intersects itself or went out of bounds
-        head = snake_move(head, direction, growth)
-        if (growth > 0) growth--
+        [head, growth] = snake_move(head, direction, growth)
         if (snake_intersects(head.next, head.value)
           || head.value.x < 0 || head.value.x > SIZE-1
           || head.value.y < 0 || head.value.y > SIZE-1) {
@@ -198,11 +239,28 @@
         apples.forEach(apple => {
           if (head.value.equals(apple)) {
             growth += 1
+            score += 1
             do {
               apple.randomize()
             } while (snake_intersects(head, apple))
           }
         })
+
+        // if its blue apple
+        if (head.value.equals(double_apple)) {
+          growth += snake_length(head)
+          do {
+            double_apple.randomize()
+          } while (snake_intersects(head, double_apple))
+        }
+
+        // if its a green apple, subtracts a pixel from body
+        if (head.value.equals(half_apple)) {
+          growth -= Math.floor(snake_length(head) / 2)
+          do {
+            half_apple.randomize()
+          } while (snake_intersects(head, half_apple))
+        }
 
         // draw the scene:
         // 1) cover the entire scene with black
@@ -212,6 +270,11 @@
         ctx.fillRect(0, 0, SIZE, SIZE)
         head.map(part => part.draw(ctx, COLORS.SNAKE))
         apples.forEach(apple => apple.draw(ctx, COLORS.APPLE))
+        double_apple.draw(ctx, COLORS.DOUBLE_APPLE)
+        half_apple.draw(ctx, COLORS.HALF_APPLE)
+
+        // update score
+        display_score()
       }
 
       // === GAME INPUT ===
