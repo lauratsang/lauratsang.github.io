@@ -88,7 +88,8 @@
   <body>
 
     <div>
-      WASD or ARROW KEYS to move. any other key to reset
+      WASD or ARROW KEYS to move. any other key to reset.
+      <br>Purple apples halve your length. Yellow apples double your length.
     </div>
     <div id="score"> Score: 0 </div>
     <canvas id="game-canvas"></canvas>
@@ -208,8 +209,11 @@
       // how many new segments to grow
       let growth = 2
       // place the apple at a random position
-      const apple = new Pixel(0, 0, COLORS.APPLE).randomize()
+      // place the apple at a random position
+      // const apple = new Pixel(0, 0, COLORS.APPLE).randomize()
       const apples = range(N_APPLES).map(i => new Pixel(0, 0, COLORS.APPLE).randomize())
+      const double_apple = new Pixel(0, 0, COLORS.DOUBLE_APPLE).randomize()
+      const half_apple = new Pixel(0, 0, COLORS.HALF_APPLE).randomize()
       // is the game over
       let gameover = false
       // last is used to avoid letting the snake do a 180
@@ -226,7 +230,7 @@
 
         // move the snake
         // gameover if snake intersects itself or went out of bounds
-        [head, growth] = snake_move(head, direction, growth)
+        ;[head, growth] = snake_move(head, direction, growth)
         if (snake_intersects(head.next, head.value)
           || head.value.x < 0 || head.value.x > SIZE-1
           || head.value.y < 0 || head.value.y > SIZE-1) {
