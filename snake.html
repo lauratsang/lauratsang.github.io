@@ -4,7 +4,7 @@
     <meta charset=utf-8>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>snake.html</title>
+    <title>snake_ultra_hydra.html</title>
     <link rel="icon" href="https://i.guim.co.uk/img/media/993cc4a2107b870f78d1228874906ad9646fb204/0_144_2160_1296/master/2160.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=708569290282f1d206da9d72d5c2046c">
     <style>body{display:flex;flex-direction:column;margin:.5em;font-family:system-ui}</style>
     <style>
@@ -88,7 +88,7 @@
   <body>
 
     <div>
-      WASD or ARROW KEYS to move. any other key to reset.
+      WASD or ARROW KEYS to move. SPACE to reset.
       <br>Purple apples halve your length. Yellow apples double your length.
     </div>
     <div id="score"> Score: 0 </div>
@@ -145,7 +145,7 @@
       }
 
       // snake behaviors/functions
-      function snake_move(head, dir, do_grow=false) {
+      function snake_move(head, dir, growth=0) {
         // moving the snake:
         // body nodes don't actually change
         // a new head is added to the front (in input direction)
@@ -209,7 +209,6 @@
       // how many new segments to grow
       let growth = 2
       // place the apple at a random position
-      // place the apple at a random position
       // const apple = new Pixel(0, 0, COLORS.APPLE).randomize()
       const apples = range(N_APPLES).map(i => new Pixel(0, 0, COLORS.APPLE).randomize())
       const double_apple = new Pixel(0, 0, COLORS.DOUBLE_APPLE).randomize()
@@ -258,7 +257,7 @@
           } while (snake_intersects(head, double_apple))
         }
 
-        // if its a yellow apple, subtracts a pixel from body
+        // if its a green apple, subtracts a pixel from body
         if (head.value.equals(half_apple)) {
           growth -= Math.floor(snake_length(head) / 2)
           do {
@@ -297,7 +296,7 @@
           case 'd': case 'ArrowRight':
             if (last !== DIRS.LEFT) direction = DIRS.RIGHT
             break
-          default:
+          case ' ':
             if (gameover) location.reload()
             break
         }
