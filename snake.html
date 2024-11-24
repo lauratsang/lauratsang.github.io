@@ -195,13 +195,13 @@
       }
       
       function display_score() {
-        document.getElementById('score').innerText = "Score: " + score;
         document.getElementById('highscore').innerText = "High Score: " + highscore;
+        document.getElementById('score').innerText = "Score: " + score;
       }
 
       function save_high_score() {
         if (score > highscore) {
-          localStorage.setItem('', String(score))
+          localStorage.setItem('highscore', String(score))
         }
       }
 
