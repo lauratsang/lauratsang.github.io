@@ -195,15 +195,26 @@
       }
       
       function display_score() {
-        document.getElementById('highscore').innerText = "High Score: " + highscore;
         document.getElementById('score').innerText = "Score: " + score;
       }
 
-      function save_high_score() {
-        if (score > highscore) {
-          localStorage.setItem('highscore', String(score))
-        }
+      // function save_high_score() {
+      //   if (score > highscore) {
+      //     localStorage.setItem('highscore', String(score))
+      //   }
+      // }
+
+      function update_high_score(new_score) {
+        // get current highscore
+        const old_high_score = parseFloat(localStorage.getItem('highscore'))
+
+        if (old_high_score == null
+          || old_high_score < score) {
+            localStorage.setItem('highscore', String(score))
+            document.getElementById('highscore').innerText = "High Score: " + localStorage.getItem('highscore')
+          }
       }
+
 
       // === GAME STATE ===
       // start the snake heading towards the right
@@ -281,6 +292,7 @@
 
         // update score
         display_score()
+        update_high_score()
       }
 
       // === GAME INPUT ===
