@@ -198,15 +198,10 @@
         document.getElementById('score').innerText = "Score: " + score;
       }
 
-      // function save_high_score() {
-      //   if (score > highscore) {
-      //     localStorage.setItem('highscore', String(score))
-      //   }
-      // }
-
       function update_high_score(new_score) {
         // get current highscore
         const old_high_score = parseFloat(localStorage.getItem('highscore'))
+        console.log(old_high_score, new_score)
 
         if (old_high_score == null
           || old_high_score < score) {
