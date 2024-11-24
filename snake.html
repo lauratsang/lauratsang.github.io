@@ -92,6 +92,7 @@
       <br>Purple apples halve your length. Yellow apples double your length.
       <br>Eat red apples to increase your score. Get the highest score!
     </div>
+    <div id="highscore"> High Score: 0 </div>
     <div id="score"> Score: 0 </div>
     <canvas id="game-canvas"></canvas>
     <div>
@@ -195,6 +196,7 @@
       
       function display_score() {
         document.getElementById('score').innerText = "Score: " + score;
+        document.getElementById('highscore').innerText = "High Score: " + highscore;
       }
 
       function save_high_score() {
