@@ -92,7 +92,7 @@
       <br>Purple apples halve your length. Yellow apples double your length.
       <br>Eat red apples to increase your score. Get the highest score!
     </div>
-    <div id="highscore"> High Score: 0 </div>
+    <div id="highscore"> High Score: </div>
     <div id="score"> Score: 0 </div>
     <canvas id="game-canvas"></canvas>
     <div>
@@ -110,7 +110,6 @@
         DOWN: new V2(0, 1),
       }
       const N_APPLES = 3
-      const HIGHSCORE = 0
 
       // set the canvas to SIZE width and height
       const canvas = document.querySelector('#game-canvas')
@@ -177,18 +176,18 @@
         // true if any body parts are placed at the position
         return head ? head.map(part => part.equals(position)).some(truthy) : false
       }
-      function snake_intersects_verbose_and_efficient(head, position) {
-        // UNNECESSARY CODE - FOR DEMONSTRATION
-        // true if any body parts are placed at the position
-        // verbose/efficient version
+      // function snake_intersects_verbose_and_efficient(head, position) {
+      //   // UNNECESSARY CODE - FOR DEMONSTRATION
+      //   // true if any body parts are placed at the position
+      //   // verbose/efficient version
 
-        let curr = head
-        while (curr) {
-          if (position.equals(curr.value)) return true
-          curr = curr.next
-        }
-        return false
-      }
+      //   let curr = head
+      //   while (curr) {
+      //     if (position.equals(curr.value)) return true
+      //     curr = curr.next
+      //   }
+      //   return false
+      // }
 
       function snake_length(head) {
         return head.length()
@@ -202,8 +201,8 @@
         // get current highscore
         const old_high_score = parseFloat(localStorage.getItem('highscore'))
         console.log(old_high_score, new_score)
-
-        if (old_high_score == null
+        
+        if (old_high_score === null
           || old_high_score < score) {
             localStorage.setItem('highscore', String(score))
             document.getElementById('highscore').innerText = "High Score: " + localStorage.getItem('highscore')
@@ -228,6 +227,11 @@
       let last = direction
       // score
       let score = 0
+      // highscore
+      let highscore = localStorage.getItem('highscore')
+      document.getElementById('highscore').innerText = "High Score: " + localStorage.getItem('highscore')
+      
+
 
       // === GAME LOOP ===
       function loop() {
@@ -287,7 +291,7 @@
 
         // update score
         display_score()
-        update_high_score()
+        update_high_score(score)
       }
 
       // === GAME INPUT ===
