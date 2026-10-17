@@ -18,6 +18,7 @@
 .career-period::before { content: ''; position: absolute; width: 1px; background: #dce5da; top: 0; bottom: 0; left: 50%; }
 .period-heading { position: relative; z-index: 1; width: fit-content; margin: -15px auto 26px; padding: 6px 10px; background: var(--paper); border: 1px solid #dce5da; border-radius: 20px; font-size: 11px; font-weight: 550; color: #54704e; line-height: 1.6; }
 .career-events { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: 42px; row-gap: 28px; list-style: none; padding: 0; margin: 0; }
+/* Both lanes share row numbers so sequential jobs cannot accidentally align. */
 .career-event { position: relative; grid-row: var(--event-row); min-width: 0; }
 .event-other { grid-column: 1; }
 .event-relevant { grid-column: 2; }
