@@ -3,53 +3,48 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Laura Tsang’s home on the web. Notes, small projects, and things made along the way.">
-  <title>Laura’s home on the web</title>
+  <meta name="description" content="Laura Tsang’s personal website: writing, experiments, and small projects.">
+  <title>Laura Tsang</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="home">
     <header class="home-header">
-      <p class="site-address">lauratsang.github.io</p>
-      <h1>Laura’s home on the web</h1>
-      <p>Notes, little projects, and whatever else finds its way here.</p>
-      <div class="welcome-line">Welcome! Make yourself at home.</div>
+      <a class="wordmark" href="./">Laura Tsang<span class="name-dot" aria-hidden="true">.</span></a>
+      <nav aria-label="Main navigation"><a href="#writing">Writing</a><a href="#projects">Projects</a><a href="https://github.com/lauratsang">GitHub <svg class="external-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M4 12 12 4M4 4h8v8"/></svg></a></nav>
     </header>
-    <div class="home-columns">
-      <aside class="sidebar" aria-label="Site directory">
-        <nav aria-label="Main navigation">
-          <h2>look around</h2>
-          <ul><li><a href="#about">about me</a></li><li><a href="#writing">the notebook</a></li><li><a href="posts/snake.html">play snake</a></li><li><a href="https://github.com/lauratsang">my github</a></li></ul>
-        </nav>
-        <div class="sidebar-note"><p><b>A small corner<br>of a very big web.</b></p><p>Handwritten HTML.<br>A little JavaScript.<br>Room to grow.</p></div>
-        <span class="web-badge">made with curiosity</span>
-      </aside>
-      <main>
-        <section id="about" aria-labelledby="about-heading">
-          <h2 id="about-heading">Hello, I’m Laura.</h2>
-          <p>This is my personal website: a place to keep notes, share things I make, and figure things out as I go.</p>
-          <p>I like the idea of having a little home on the internet. Nothing fancy. Just a few pages that feel like me.</p>
-          <p>Thanks for stopping by. Take a look around!</p>
-        </section>
-        <section id="writing" aria-labelledby="writing-heading">
-          <h2 id="writing-heading">From the notebook</h2>
-          <p class="section-intro">Small projects &amp; things worth keeping.</p>
-          <article class="notebook-entry">
-            <span class="entry-type">[ a little project ]</span>
-            <h3><a href="posts/snake.html">A little game of snake</a></h3>
-            <p>A classic browser game with colorful apples and a high score to chase. Bring a keyboard.</p>
-            <a class="read-link" href="posts/snake.html">Read &amp; play &rarr;</a>
-          </article>
-          <p class="more-soon">More pages as I go along...</p>
-        </section>
-        <section class="colophon" aria-labelledby="colophon-heading">
-          <h2 id="colophon-heading">About this little site</h2>
-          <p>No feed to keep up with, no algorithm to please. Just a website, built a page at a time.</p>
-          <p>You can peek at the <a href="https://github.com/lauratsang/lauratsang.github.io">source code</a>, too.</p>
-        </section>
-      </main>
-    </div>
-    <footer class="home-footer"><span>You’ve reached the bottom of the page.</span><a href="#">back to top &uarr;</a></footer>
+    <main>
+      <section class="intro" aria-labelledby="intro-heading">
+        <p class="kicker">A personal website, always in progress</p>
+        <h1 id="intro-heading">Hi, I’m Laura.</h1>
+        <!-- Placeholder introduction: replace these paragraphs with your own bio. -->
+        <p class="intro-lead">I’m interested in how things work, how we learn, and what happens when we follow a little curiosity.</p>
+        <p>This is where I collect my <a href="#writing">writing</a>, share <a href="#projects">small projects</a>, and think out loud. Lately, I’ve been making things for the web and finding reasons to try something new.</p>
+        <p>I like projects that start with a question and turn into something you can play with. Sometimes that’s a useful tool. Sometimes it’s <a href="posts/snake.html">a little game of snake</a>.</p>
+        <p class="intro-aside">The words here are a starting point. The rest will take shape along the way.</p>
+      </section>
+      <section class="section" id="writing" aria-labelledby="writing-heading">
+        <div class="section-heading"><h2 id="writing-heading">Writing</h2><span>Notes from the notebook</span></div>
+        <a class="writing-row" href="posts/snake.html"><span><strong>A little game of snake</strong><span class="row-description">A small experiment in making something just for fun.</span></span><span class="row-label">Project</span></a>
+        <!-- These are filler entries, not published posts. Replace them with links when ready. -->
+        <div class="writing-row draft-row"><span><strong>Learning by making things</strong><span class="row-description">On starting before you have it all figured out.</span></span><span class="row-label">Draft</span></div>
+        <div class="writing-row draft-row"><span><strong>A place for unfinished ideas</strong><span class="row-description">Why I wanted a small corner of the internet.</span></span><span class="row-label">Draft</span></div>
+        <div class="writing-row draft-row"><span><strong>Paying attention to the everyday</strong><span class="row-description">A few observations, collected along the way.</span></span><span class="row-label">Draft</span></div>
+      </section>
+      <section class="section" id="projects" aria-labelledby="projects-heading">
+        <div class="section-heading"><h2 id="projects-heading">Things I’ve made</h2><span>Small ideas, made real</span></div>
+        <div class="project"><h3><a href="posts/snake.html">Snake <svg class="external-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M4 12 12 4M4 4h8v8"/></svg></a><span class="project-kind">JavaScript · Game</span></h3><p>A familiar game with a few colorful twists. Eat apples, chase a high score, and try one more round.</p></div>
+        <div class="project"><h3><a href="breakout.html">Breakout <svg class="external-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M4 12 12 4M4 4h8v8"/></svg></a><span class="project-kind">JavaScript · Game</span></h3><p>A browser version of the classic brick-breaking game. A paddle, a ball, and a screen full of possibilities.</p></div>
+      </section>
+      <section class="section currently" aria-labelledby="currently-heading">
+        <div class="section-heading"><h2 id="currently-heading">A few things, lately</h2><span>Room for a little life update</span></div>
+        <!-- Placeholder text: update this list with what you are actually doing. -->
+        <p>Making more time for small creative projects. Keeping a notebook of questions. Building this website one page at a time.</p>
+        <p class="placeholder-note">Placeholder notes — more to come.</p>
+      </section>
+      <section class="elsewhere" aria-labelledby="elsewhere-heading"><h2 id="elsewhere-heading">Elsewhere</h2><p>You can find my projects on <a href="https://github.com/lauratsang">GitHub <svg class="external-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M4 12 12 4M4 4h8v8"/></svg></a>.</p></section>
+    </main>
+    <footer class="home-footer"><span>Laura Tsang</span><span>A small, independent corner of the web.</span><a href="#">Back to top ↑</a></footer>
   </div>
 </body>
 </html>
