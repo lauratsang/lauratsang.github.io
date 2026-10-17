@@ -1,16 +1,37 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset=utf-8>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>laura.html</title>
-    <!-- <link rel="icon" href="https://i.guim.co.uk/img/media/993cc4a2107b870f78d1228874906ad9646fb204/0_144_2160_1296/master/2160.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=708569290282f1d206da9d72d5c2046c"> -->
-    <style>body{display:flex;flex-direction:column;margin:.5em;font-family:system-ui}</style>
-
-  </head>
-  <body>
-
-    <a href="snake.html">Play snake!</a>
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Laura Tsang’s personal blog. A place for notes, experiments, and things made along the way.">
+  <title>Laura Tsang — Notes & experiments</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="./">laura tsang</a>
+      <nav aria-label="Main navigation"><a href="#writing">Writing</a><a href="#about">About</a></nav>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="welcome">
+        <p class="eyebrow">A little corner of the internet</p>
+        <h1 id="welcome">Notes &amp;<br>experiments.</h1>
+        <p>A place for things I’m thinking about, things I’m learning, and things I make along the way.</p>
+      </section>
+      <section id="writing" aria-labelledby="writing-heading">
+        <h2 class="section-label" id="writing-heading">The notebook</h2>
+        <a class="post-link" href="posts/snake.html">
+          <div><span class="tag">Code &amp; play</span><h2>A little game of snake</h2><p>A classic game, a few colorful twists, and a high score to chase. Play it here.</p></div>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+      <section class="about" id="about" aria-labelledby="about-heading">
+        <h2 class="section-label" id="about-heading">A quick hello</h2>
+        <p style="margin-top:22px">I’m Laura. This is my space to collect ideas and small projects, and to share a little of what I’m working on.</p>
+      </section>
+    </main>
+    <footer class="site-footer"><span>A work in progress, always.</span><a href="https://github.com/lauratsang">GitHub ↗</a></footer>
+  </div>
+</body>
 </html>
