@@ -49,7 +49,7 @@
 .role-toolkit { margin-top: 21px; padding: 15px; background: #f1f4ef; border: 1px solid #e4e9df; border-radius: 9px; }
 .role-toolkit h4, .role-toolkit h3 { margin: 0 0 11px; color: #52644c; font-size: 10px; line-height: 1.6; font-weight: 550; letter-spacing: .8px; text-transform: uppercase; }
 .position-skills { display: flex; flex-wrap: wrap; gap: 7px 6px; list-style: none; padding: 0; margin: 0; }
-.position-skills li { margin: 0; padding: 4px 8px; border: 1px solid #dce4d4; border-radius: 5px; background: #fdfefb; color: #465b43; font-size: 11px; line-height: 1.7; overflow-wrap: anywhere; }
+.position-skills li { margin: 0; padding: 4px 8px; border: 1px solid #dce4d4; border-radius: 5px; background: #f1f5ef; color: #465b43; font-size: 11px; line-height: 1.7; overflow-wrap: anywhere; }
 .additional-skills { border-top: 1px solid var(--line); margin: 20px 0 55px; padding-top: 30px; }
 .skills-context { color: var(--muted); font-size: 13px; }
 .extra-skill-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -81,3 +81,16 @@
   .event-card { break-inside: avoid; }
   .role-toolkit, .position-skills li { background: white; }
 }
+
+/* Skills stay as individual green tags without a surrounding panel. */
+.event-card > .position-skills { margin-top: 20px; }
+.college-job-list { list-style: none; padding: 0; margin: 22px 0 0; }
+.college-job-list > li { padding: 10px 0; border-top: 1px solid var(--line); line-height: 1.6; }
+.college-job-list > li:first-child { padding-top: 0; border-top: 0; }
+.college-job-list > li:last-child { padding-bottom: 0; }
+.college-job-name, .college-job-role, .college-job-date { display: inline; }
+.college-job-name { font-size: 13px; font-weight: 500; }
+.college-job-role { font-size: 12px; color: #63705e; }
+.college-job-role::before { content: " — "; }
+.college-job-date { font-size: 11px; color: #7a8475; }
+.college-job-date::before { content: " · "; }
