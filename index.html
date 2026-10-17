@@ -3,35 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Laura Tsang’s personal blog. A place for notes, experiments, and things made along the way.">
-  <title>Laura Tsang — Notes & experiments</title>
+  <meta name="description" content="Laura Tsang’s home on the web. Notes, small projects, and things made along the way.">
+  <title>Laura’s home on the web</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="shell">
-    <header class="site-header">
-      <a class="brand" href="./">laura tsang</a>
-      <nav aria-label="Main navigation"><a href="#writing">Writing</a><a href="#about">About</a></nav>
+  <div class="home">
+    <header class="home-header">
+      <p class="site-address">lauratsang.github.io</p>
+      <h1>Laura’s home on the web</h1>
+      <p>Notes, little projects, and whatever else finds its way here.</p>
+      <div class="welcome-line">Welcome! Make yourself at home.</div>
     </header>
-    <main>
-      <section class="intro" aria-labelledby="welcome">
-        <p class="eyebrow">A little corner of the internet</p>
-        <h1 id="welcome">Notes &amp;<br>experiments.</h1>
-        <p>A place for things I’m thinking about, things I’m learning, and things I make along the way.</p>
-      </section>
-      <section id="writing" aria-labelledby="writing-heading">
-        <h2 class="section-label" id="writing-heading">The notebook</h2>
-        <a class="post-link" href="posts/snake.html">
-          <div><span class="tag">Code &amp; play</span><h2>A little game of snake</h2><p>A classic game, a few colorful twists, and a high score to chase. Play it here.</p></div>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-      </section>
-      <section class="about" id="about" aria-labelledby="about-heading">
-        <h2 class="section-label" id="about-heading">A quick hello</h2>
-        <p style="margin-top:22px">I’m Laura. This is my space to collect ideas and small projects, and to share a little of what I’m working on.</p>
-      </section>
-    </main>
-    <footer class="site-footer"><span>A work in progress, always.</span><a href="https://github.com/lauratsang">GitHub ↗</a></footer>
+    <div class="home-columns">
+      <aside class="sidebar" aria-label="Site directory">
+        <nav aria-label="Main navigation">
+          <h2>look around</h2>
+          <ul><li><a href="#about">about me</a></li><li><a href="#writing">the notebook</a></li><li><a href="posts/snake.html">play snake</a></li><li><a href="https://github.com/lauratsang">my github</a></li></ul>
+        </nav>
+        <div class="sidebar-note"><p><b>A small corner<br>of a very big web.</b></p><p>Handwritten HTML.<br>A little JavaScript.<br>Room to grow.</p></div>
+        <span class="web-badge">made with curiosity</span>
+      </aside>
+      <main>
+        <section id="about" aria-labelledby="about-heading">
+          <h2 id="about-heading">Hello, I’m Laura.</h2>
+          <p>This is my personal website: a place to keep notes, share things I make, and figure things out as I go.</p>
+          <p>I like the idea of having a little home on the internet. Nothing fancy. Just a few pages that feel like me.</p>
+          <p>Thanks for stopping by. Take a look around!</p>
+        </section>
+        <section id="writing" aria-labelledby="writing-heading">
+          <h2 id="writing-heading">From the notebook</h2>
+          <p class="section-intro">Small projects &amp; things worth keeping.</p>
+          <article class="notebook-entry">
+            <span class="entry-type">[ a little project ]</span>
+            <h3><a href="posts/snake.html">A little game of snake</a></h3>
+            <p>A classic browser game with colorful apples and a high score to chase. Bring a keyboard.</p>
+            <a class="read-link" href="posts/snake.html">Read &amp; play &rarr;</a>
+          </article>
+          <p class="more-soon">More pages as I go along...</p>
+        </section>
+        <section class="colophon" aria-labelledby="colophon-heading">
+          <h2 id="colophon-heading">About this little site</h2>
+          <p>No feed to keep up with, no algorithm to please. Just a website, built a page at a time.</p>
+          <p>You can peek at the <a href="https://github.com/lauratsang/lauratsang.github.io">source code</a>, too.</p>
+        </section>
+      </main>
+    </div>
+    <footer class="home-footer"><span>You’ve reached the bottom of the page.</span><a href="#">back to top &uarr;</a></footer>
   </div>
 </body>
 </html>
