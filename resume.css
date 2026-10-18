@@ -75,6 +75,9 @@
 .education-job-dates { font-size: 13px; color: #59676b; margin: 5px 0 12px; }
 
 
-.education-subentry { margin-top: 15px; }
+.education-subentry { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--line); }
 .subentry-title { font-size: 14px; font-weight: 500; color: #303d42; margin: 0; line-height: 1.6; }
 .education-subentry > .position-skills { margin-top: 9px; }
+
+.education-record > .record-organization { grid-row: 1; }
+.school-details { margin-top: 11px; }
