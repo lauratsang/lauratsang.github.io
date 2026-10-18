@@ -68,3 +68,16 @@
   .resume-record { break-inside: avoid; }
   .position-skills li { background: white; }
 }
+
+.college-jobs-subline { margin-top: 11px; color: var(--accent); }
+.college-jobs-subline > summary { width: fit-content; cursor: pointer; font-size: 13px; line-height: 1.7; }
+.college-jobs-subline > summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+.college-jobs-subline > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+.education-job { margin-top: 13px; color: var(--accent); }
+.education-job > summary { width: fit-content; cursor: pointer; font-size: 13px; line-height: 1.7; }
+.education-job > summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+.education-job > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.education-job-note { color: #59676b; font-size: 13px; line-height: 1.6; margin: 5px 0 0; }
+.education-job-dates { font-size: 13px; color: #59676b; margin: 5px 0 12px; }
+.education-job .position-skills { margin-bottom: 15px; }
