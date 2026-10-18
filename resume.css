@@ -21,11 +21,10 @@
 .position-skills li { margin: 0; padding: 3px 7px; border: 1px solid var(--accent-border); border-radius: 4px; background: var(--accent-soft); color: var(--accent); font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
 .record-body > .position-skills { margin-top: 11px; }
 .record-details { grid-column: 2 / -1; grid-row: 2; min-width: 0; color: var(--accent); }
-.record-details > summary { width: fit-content; cursor: pointer; font-size: 13px; line-height: 1.7; }
-.record-details > summary:hover { text-decoration: underline; text-underline-offset: 4px; }
-.record-details > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.record-details > summary, .education-job > summary, .college-jobs-subline > summary { width: fit-content; cursor: pointer; font-size: 13px; line-height: 1.7; }
+.record-details > summary:hover, .education-job > summary:hover, .college-jobs-subline > summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+.record-details > summary:focus-visible, .education-job > summary:focus-visible, .college-jobs-subline > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .record-description { padding: 18px 0 0; color: #4c5d62; font-size: 14px; line-height: 1.8; }
-.record-description > .position-skills { margin-top: 16px; }
 .record-context { color: #59676b; font-size: 13px; margin: 0 0 15px; }
 .event-description, .record-description > ul:not(.position-skills):not(.college-job-list) { padding-left: 18px; margin: 0 0 15px; font-size: 14px; line-height: 1.8; color: #4c5d62; }
 .event-description > li, .record-description > ul:not(.position-skills):not(.college-job-list) > li { margin-bottom: 9px; padding-left: 2px; }
@@ -69,15 +68,13 @@
   .position-skills li { background: white; }
 }
 
-.college-jobs-subline { margin-top: 11px; color: var(--accent); }
-.college-jobs-subline > summary { width: fit-content; cursor: pointer; font-size: 13px; line-height: 1.7; }
-.college-jobs-subline > summary:hover { text-decoration: underline; text-underline-offset: 4px; }
-.college-jobs-subline > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.college-jobs-subline { margin-top: 9px; color: var(--accent); }
 
-.education-job { margin-top: 13px; color: var(--accent); }
-.education-job > summary { width: fit-content; cursor: pointer; font-size: 13px; line-height: 1.7; }
-.education-job > summary:hover { text-decoration: underline; text-underline-offset: 4px; }
-.education-job > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.education-job { margin-top: 9px; color: var(--accent); }
 .education-job-note { color: #59676b; font-size: 13px; line-height: 1.6; margin: 5px 0 0; }
 .education-job-dates { font-size: 13px; color: #59676b; margin: 5px 0 12px; }
-.education-job .position-skills { margin-bottom: 15px; }
+
+
+.education-subentry { margin-top: 15px; }
+.subentry-title { font-size: 14px; font-weight: 500; color: #303d42; margin: 0; line-height: 1.6; }
+.education-subentry > .position-skills { margin-top: 9px; }
