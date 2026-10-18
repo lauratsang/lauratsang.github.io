@@ -1,6 +1,6 @@
 # Phosphor icons
 
-Regular LinkedIn, GitHub, and Instagram logos from `@phosphor-icons/core` version 2.1.1.
+Regular LinkedIn, GitHub, and Instagram logos, plus envelope-simple and chat-text icons from `@phosphor-icons/core` version 2.1.1.
 
 Source: https://github.com/phosphor-icons/core
 

@@ -21,3 +21,6 @@
   .home-footer .social-links { margin-left: auto; }
   .site-footer { align-items: flex-start; }
 }
+
+.social-icon-email { --social-icon: url("assets/icons/phosphor/envelope-simple.svg"); }
+.social-icon-text { --social-icon: url("assets/icons/phosphor/chat-text.svg"); }
