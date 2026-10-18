@@ -73,8 +73,27 @@
       }
     });
   }
-  trackTiles(layer);
-  layer.addTo(map);
+  let vectorMap;
+  if (window.maplibregl && L.maplibreGL && window.PALE_TRAILS_STYLE) {
+    try {
+      const style = JSON.parse(JSON.stringify(window.PALE_TRAILS_STYLE).replaceAll('{key}', encodeURIComponent(config.basemapKey)));
+      const vector = L.maplibreGL({ style, attributionControl: false, interactive: false });
+      vector.addTo(map);
+      vectorMap = vector.getMaplibreMap();
+      map.attributionControl.addAttribution(osmAttribution + ' · &copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a>');
+      vectorMap.once('load', () => { status.hidden = true; });
+      vectorMap.on('error', () => {
+        status.hidden = false;
+        status.textContent = 'Some map details couldn’t load. Check your connection and refresh to retry.';
+      });
+    } catch {
+      trackTiles(layer);
+      layer.addTo(map);
+    }
+  } else {
+    trackTiles(layer);
+    layer.addTo(map);
+  }
   // Multiply only the relief layer over the basemap; keep routes, pins, and popups above it.
   const reliefPane = map.createPane('hillshade');
   reliefPane.style.zIndex = 250;
@@ -84,10 +103,15 @@
   });
   const terrainToggle = document.querySelector('#map-hillshade');
   const updateRelief = () => {
+    if (vectorMap) {
+      if (vectorMap.isStyleLoaded() && vectorMap.getLayer('Hillshade')) vectorMap.setLayoutProperty('Hillshade', 'visibility', terrainToggle.checked ? 'visible' : 'none');
+      return;
+    }
     const show = terrainToggle.checked && map.getZoom() >= 3;
     if (show && !map.hasLayer(relief)) relief.addTo(map);
     if (!show && map.hasLayer(relief)) map.removeLayer(relief);
   };
+  if (vectorMap) vectorMap.once('load', updateRelief);
   terrainToggle.addEventListener('change', updateRelief);
   map.on('zoomend', updateRelief);
   updateRelief();
