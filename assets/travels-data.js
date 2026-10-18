@@ -1,7 +1,8 @@
-// Public browser token for the travel basemap (never use a secret sk. token here).
+// MapTiler basemap configuration. Use a public, domain-restricted key.
 window.TRAVEL_MAP_CONFIG = {
-  mapboxToken: '',
-  style: 'mapbox-map-design/ckshxkppe0gge18nz20i0nrwq'
+  basemapProvider: 'maptiler',
+  basemapKey: 'a3s9nJT6ZSGNi5gYPEOE',
+  basemapStyle: 'dataviz-v4'
 };
 
 // Add places here to publish pins for every visitor. Coordinates: latitude, longitude.

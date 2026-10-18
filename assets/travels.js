@@ -10,7 +10,7 @@
     place.coordinates.length === 2 && place.coordinates.every(Number.isFinite) &&
     Math.abs(place.coordinates[0]) <= 85 && Math.abs(place.coordinates[1]) <= 180);
   const map = L.map('travel-map', {
-    scrollWheelZoom: false, worldCopyJump: false, zoomSnap: 0.25,
+    scrollWheelZoom: true, worldCopyJump: false, zoomSnap: 0.25,
     maxBounds: [[-85.05112878, -180], [85.05112878, 180]], maxBoundsViscosity: 1,
     minZoom: 1, maxZoom: 18, attributionControl: true
   });
@@ -30,12 +30,16 @@
   const osm = () => L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19, attribution: osmAttribution
   });
-  let layer = config.mapboxToken ? L.tileLayer(
-    `https://api.mapbox.com/styles/v1/${config.style}/tiles/512/{z}/{x}/{y}?access_token=${encodeURIComponent(config.mapboxToken)}`,
-    { tileSize: 512, zoomOffset: -1, minZoom: 1, maxZoom: 18,
-      attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> · ' + osmAttribution + ' · Frank by Clare Trainor' }
-  ) : osm();
-  let fallback = !config.mapboxToken;
+  const basemap = config.basemapKey ? L.tileLayer(
+    config.basemapProvider === 'maptiler'
+      ? `https://api.maptiler.com/maps/${encodeURIComponent(config.basemapStyle || 'positron')}/{z}/{x}/{y}.png?key=${encodeURIComponent(config.basemapKey)}`
+      : `https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png?key=${encodeURIComponent(config.basemapKey)}`,
+    { maxZoom: 20, attribution: osmAttribution + (config.basemapProvider === 'maptiler'
+      ? ' · &copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a>'
+      : ' · &copy; <a href="https://carto.com/attributions">CARTO</a>') }
+  ) : null;
+  let layer = basemap || osm();
+  let fallback = !basemap;
   function trackTiles(tiles) {
     tiles.on('load', () => { status.hidden = true; });
     tiles.on('tileerror', () => {
@@ -46,7 +50,7 @@
         trackTiles(layer);
         layer.addTo(map);
         status.hidden = false;
-        status.textContent = 'Frank is unavailable; showing OpenStreetMap.';
+        status.textContent = 'The selected basemap is unavailable; showing OpenStreetMap.';
       } else {
         status.hidden = false;
         status.textContent = 'Some map tiles couldn’t load. Check your connection and zoom to retry.';
@@ -55,7 +59,7 @@
   }
   trackTiles(layer);
   layer.addTo(map);
-  // Multiply only the relief layer over Frank; keep routes, pins, and popups above it.
+  // Multiply only the relief layer over the basemap; keep routes, pins, and popups above it.
   const reliefPane = map.createPane('hillshade');
   reliefPane.style.zIndex = 250;
   const relief = L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}', {
