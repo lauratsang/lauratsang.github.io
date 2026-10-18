@@ -1,23 +1,38 @@
-(() => {
+(async () => {
   const status = document.querySelector('#map-status');
   if (!window.L) {
     status.textContent = 'The map couldn’t load. Please refresh to try again.';
     return;
   }
   const config = window.TRAVEL_MAP_CONFIG || {};
+  // Cached limits keep the map bounded even if the metadata request fails.
+  let limits = { minzoom: 0, maxzoom: 22, bounds: [-180, -85.0511, 180, 85.0511] };
+  if (config.basemapProvider === 'maptiler' && config.basemapKey) {
+    try {
+      const response = await fetch(`https://api.maptiler.com/maps/${encodeURIComponent(config.basemapStyle)}/tiles.json?key=${encodeURIComponent(config.basemapKey)}`, { signal: AbortSignal.timeout(5000) });
+      if (!response.ok) throw new Error('Metadata unavailable');
+      const metadata = await response.json();
+      if (Number.isFinite(metadata.minzoom) && Number.isFinite(metadata.maxzoom) && metadata.minzoom <= metadata.maxzoom) {
+        limits.minzoom = metadata.minzoom;
+        limits.maxzoom = metadata.maxzoom;
+      }
+      if (Array.isArray(metadata.bounds) && metadata.bounds.length === 4 && metadata.bounds.every(Number.isFinite)) limits.bounds = metadata.bounds;
+    } catch { /* Use the last verified Dataviz metadata limits. */ }
+  }
+  const mapBounds = [[limits.bounds[1], limits.bounds[0]], [limits.bounds[3], limits.bounds[2]]];
   const places = (window.TRAVEL_PLACES || []).filter(place =>
     typeof place.name === 'string' && Array.isArray(place.coordinates) &&
     place.coordinates.length === 2 && place.coordinates.every(Number.isFinite) &&
     Math.abs(place.coordinates[0]) <= 85 && Math.abs(place.coordinates[1]) <= 180);
   const map = L.map('travel-map', {
     scrollWheelZoom: true, worldCopyJump: false, zoomSnap: 0.25,
-    maxBounds: [[-85.05112878, -180], [85.05112878, 180]], maxBoundsViscosity: 1,
-    minZoom: 1, maxZoom: 18, attributionControl: true
+    maxBounds: mapBounds, maxBoundsViscosity: 1,
+    minZoom: limits.minzoom, maxZoom: limits.maxzoom, attributionControl: true
   });
   // Cover the viewport with the projected world; never reveal space outside its edges.
   const worldZoom = () => {
     const size = map.getSize();
-    return Math.ceil(Math.log2(Math.max(size.x, size.y) / 256) * 4) / 4;
+    return Math.min(limits.maxzoom, Math.max(limits.minzoom, Math.ceil(Math.log2(Math.max(size.x, size.y) / 256) * 4) / 4));
   };
   const world = () => {
     const zoom = worldZoom();
@@ -28,13 +43,13 @@
   L.control.scale({ imperial: false }).addTo(map);
   const osmAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
   const osm = () => L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19, attribution: osmAttribution
+    maxZoom: 19, maxNativeZoom: 19, noWrap: true, attribution: osmAttribution
   });
   const basemap = config.basemapKey ? L.tileLayer(
     config.basemapProvider === 'maptiler'
       ? `https://api.maptiler.com/maps/${encodeURIComponent(config.basemapStyle || 'positron')}/{z}/{x}/{y}.png?key=${encodeURIComponent(config.basemapKey)}`
       : `https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png?key=${encodeURIComponent(config.basemapKey)}`,
-    { maxZoom: 20, attribution: osmAttribution + (config.basemapProvider === 'maptiler'
+    { minZoom: limits.minzoom, maxZoom: limits.maxzoom, minNativeZoom: limits.minzoom, maxNativeZoom: limits.maxzoom, noWrap: true, bounds: mapBounds, attribution: osmAttribution + (config.basemapProvider === 'maptiler'
       ? ' · &copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a>'
       : ' · &copy; <a href="https://carto.com/attributions">CARTO</a>') }
   ) : null;
@@ -46,6 +61,7 @@
       if (!fallback) {
         fallback = true;
         map.removeLayer(layer);
+        map.setMaxZoom(19);
         layer = osm();
         trackTiles(layer);
         layer.addTo(map);
@@ -63,7 +79,7 @@
   const reliefPane = map.createPane('hillshade');
   reliefPane.style.zIndex = 250;
   const relief = L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}', {
-    pane: 'hillshade', opacity: 0.22, minZoom: 3, maxZoom: 18,
+    pane: 'hillshade', opacity: 0.22, minZoom: 3, maxZoom: limits.maxzoom, maxNativeZoom: 16, noWrap: true,
     attribution: 'Hillshade: <a href="https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer">Esri and contributors</a>'
   });
   const terrainToggle = document.querySelector('#map-hillshade');
