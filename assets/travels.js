@@ -25,14 +25,16 @@
     place.coordinates.length === 2 && place.coordinates.every(Number.isFinite) &&
     Math.abs(place.coordinates[0]) <= 85 && Math.abs(place.coordinates[1]) <= 180);
   const map = L.map('travel-map', {
-    scrollWheelZoom: true, worldCopyJump: false, zoomSnap: 0.25,
+    scrollWheelZoom: true, worldCopyJump: false, zoomSnap: 1, zoomDelta: 1,
+    zoomAnimation: false, markerZoomAnimation: false, fadeAnimation: false,
+    wheelDebounceTime: 80, wheelPxPerZoomLevel: 120,
     maxBounds: mapBounds, maxBoundsViscosity: 1,
     minZoom: limits.minzoom, maxZoom: limits.maxzoom, attributionControl: true
   });
   // Cover the viewport with the projected world; never reveal space outside its edges.
   const worldZoom = () => {
     const size = map.getSize();
-    return Math.min(limits.maxzoom, Math.max(limits.minzoom, Math.ceil(Math.log2(Math.max(size.x, size.y) / 256) * 4) / 4));
+    return Math.min(limits.maxzoom, Math.max(limits.minzoom, Math.ceil(Math.log2(Math.max(size.x, size.y) / 256))));
   };
   const world = () => {
     const zoom = worldZoom();

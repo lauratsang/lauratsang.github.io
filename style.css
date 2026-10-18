@@ -139,3 +139,5 @@
 
 .travel-pin .location-pin-svg,.home-pin-svg{background:#a64e3c}
 .travel-home-pin>span{border-color:#a64e3c}
+
+.travel-vector-basemap{position:absolute;top:0;left:0;overflow:hidden;pointer-events:none}
