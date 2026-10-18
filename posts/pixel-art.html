@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>pixel art</title><meta name=description content="pixel art drawer from https://github.com/0shuvo0/pilex-art/tree/main" />
+  <style>
+    /* Project media styles. */
+    img, video, iframe {
+      max-width: 100%;
+      max-height: 400px;
+      flex-shrink: 1;
+      object-fit: contain;
+      object-position: left;
+      image-rendering: pixelated;
+    }
+    /* === BASE STRUCTURE === */
+    .navbar, .container {
+        width: 100%;
+        border-radius: 1px;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        gap: 1em;
+        background-color: #EED9C4; /* soft cream */
+        border: 0.5px solid #674e38; /* cherry brown accent */
+        border-radius: 8px;
+        padding: 0.75em 1.25em;
+        margin-bottom: 0.5em;
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar-text {
+        color: #674e38;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
+
+    .navbar-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.75em;
+    }
+
+    .btn {
+        background: linear-gradient(145deg, #b44a30, #8e3925); /* cherry tones */
+        color: #fff8f2;
+        cursor: pointer;
+        height: 2.5em;
+        width: 5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 1.25em;
+        border: 1px solid #4b1d10;
+        border-radius: 999px;
+        box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.05);
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background: linear-gradient(145deg, #c95c3f, #a0462b);
+        border-color: #4b1d10;
+    }
+
+    .color {
+        background: linear-gradient(145deg, #f5f5f5, #e0e0e0);
+        cursor: pointer;
+        width: 2.5em;
+        height: 2.5em;
+        border-radius: 6px;
+        border: 1px solid #674e38;
+        box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.05);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .container {
+        width: 100%;
+        height: 400px;
+        display: grid;
+        gap: 2px;
+        padding: 3px;
+        margin: 0 auto;
+        border-radius: 3px;
+        box-sizing: border-box;
+        background-color: #FFF8F2; /* warm cream background */
+        transition: background-color 0.3s ease;
+    }
+
+    .pixel {
+        background-color: #E9DFD8; /* slightly darker cream */
+        aspect-ratio: 1 / 1;
+    }
+
+    /* === TOGGLE SWITCH === */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+    }
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: #d6bca4; /* cream base */
+        border-radius: 20px;
+        transition: 0.4s;
+    }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px; width: 14px;
+        left: 3px; bottom: 3px;
+        background-color: white;
+        border-radius: 50%;
+        transition: 0.4s;
+    }
+    input:checked + .slider {
+        background-color: #b44a30; /* cherry tone when active */
+    }
+    input:checked + .slider:before {
+        transform: translateX(20px);
+    }
+
+    /* === DARK LCD THEME === */
+    body.lcd {
+        background-color: #000;
+        color: #33ff33;
+    }
+
+    body.lcd .navbar {
+        background-color: #000;
+        border-color: #003300;
+    }
+
+    body.lcd .navbar-text {
+        color: #33ff33;
+        text-shadow: 0 0 5px #33ff33;
+    }
+
+    body.lcd .btn {
+        background: #001900;
+        color: #33ff33;
+        border-color: #004400;
+    }
+
+    body.lcd .btn:hover {
+        background: #003000;
+    }
+
+    body.lcd .color {
+        background: #001900;
+        border-color: #004400;
+    }
+
+    body.lcd .container {
+        background-color: #001a00;
+    }
+
+    body.lcd .pixel {
+        background-color: #003300;
+    }
+  </style>
+<style>body{font-family:system-ui,sans-serif} .back-link{display:inline-block;margin:12px;color:inherit;font-size:14px}*{box-sizing:border-box}body{margin:16px}.navbar{flex-wrap:wrap;justify-content:space-between}.navbar-text{font-size:14px}.navbar-controls{gap:8px}.btn{width:auto}</style>
+<link rel="stylesheet" href="../assets/typography.css?v=consistent-2">
+</head>
+<body>
+<a class="back-link" href="../projects.html">← Projects</a>
+
+  
+  <br/>
+  <h2>draw something!</h2>
+  <br/>
+    <div class="navbar">
+    <span class="navbar-text">Leave a message or a drawing!</span>
+    <div class="navbar-controls">
+        <input type="color" value="#E50032" class="color">
+        <button class="btn">clear</button>
+
+        <!-- Theme toggle -->
+        <label class="switch">
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider"></span>
+        </label>
+    </div>
+    </div>
+    <div class="container">
+    </div>
+
+  <script>
+    const container = document.querySelector('.container');
+    const color = document.querySelector('.color');
+    const resetBtn = document.querySelector('.btn');
+
+    let draw = false;
+    const pixelSize = 10; // size of each pixel in px
+
+    function populate() {
+        container.innerHTML = '';
+
+        // calculate how many columns and rows fit inside container
+        const containerWidth = container.clientWidth - 5*7;
+        const containerHeight = container.clientHeight - 2*6;
+        const cols = Math.floor(containerWidth / pixelSize);
+        const rows = Math.floor(containerHeight / pixelSize);
+
+        // set the CSS grid accordingly
+        container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+        container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+
+        for (let i = 0; i < cols * rows; i++) {
+            const div = document.createElement('div');
+            div.classList.add('pixel');
+
+            div.addEventListener('mouseover', () => {
+            if (!draw) return;
+            div.style.backgroundColor = color.value;
+            });
+            div.addEventListener('mousedown', () => {
+            div.style.backgroundColor = color.value;
+            });
+
+            container.appendChild(div);
+        }
+        const toggle = document.getElementById('theme-toggle');
+
+        toggle.addEventListener('change', () => {
+            document.body.classList.toggle('lcd', toggle.checked);
+        });
+    }
+
+    window.addEventListener("mousedown", () => draw = true);
+    window.addEventListener("mouseup", () => draw = false);
+
+    resetBtn.addEventListener('click', populate);
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const colorPicker = document.querySelector('.color');
+
+    // Set initial default color
+    colorPicker.value = '#E50032'; // brush color for light mode
+
+    themeToggle.addEventListener('change', () => {
+    if (themeToggle.checked) {
+        // Dark LCD mode
+        document.body.classList.add('lcd');
+        colorPicker.value = '#33ff33'; // neon green brush
+    } else {
+        // Light mode
+        document.body.classList.remove('lcd');
+        colorPicker.value = '#E50032'; // cherry brush
+    }
+    });
+
+    // populate once at start
+    populate();
+  </script>
+<p>Adapted from <a href="https://github.com/0shuvo0/pilex-art">0shuvo0’s pixel art drawer</a>.</p>
+</body>
+</html>

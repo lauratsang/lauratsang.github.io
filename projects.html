@@ -3,43 +3,78 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Snake and Breakout: browser games by Laura Tsang.">
+<meta name="description" content="Maps, planning projects, games, and creative experiments by Laura Tsang.">
 <title>Projects — Laura Tsang</title>
-<link rel="stylesheet" href="style.css?v=footer-contact-1">
+<link rel="stylesheet" href="style.css?v=project-filters-1">
+<script src="assets/project-filters.js" defer></script>
+<link rel="stylesheet" href="assets/typography.css?v=consistent-2">
 </head>
 <body>
 <div class="home">
 <header class="home-header"><a class="wordmark" href="./">Laura Tsang<span class="name-dot" aria-hidden="true">.</span></a>
-<nav aria-label="Main navigation"><a href="journal.html">Journal</a><a href="projects.html" aria-current="page">Projects</a><a href="resume.html">Résumé</a>
+<nav aria-label="Main navigation"><a href="projects.html" aria-current="page">Projects</a><a href="journal.html">Journal</a><a href="travels.html">Travels</a><a href="resume.html">Résumé</a>
 </nav>
 </header>
 <main>
 <section class="page-intro">
-<p class="kicker">Code &amp; play
-</p>
 <h1>Projects
 </h1>
-<p class="intro-lead">A couple of small things made for the web.
+<p class="intro-lead">Miscellaneous planning and coding projects.
 </p>
 </section>
-<section aria-label="Projects">
-<article class="project project-entry">
-<h2><a href="posts/snake.html">Snake</a><span class="project-kind">JavaScript · Game</span>
-</h2>
-<p>A familiar game with a few colorful twists. Eat apples, chase a high score, and try one more round.
-</p>
-<p class="project-links"><a href="posts/snake.html">About &amp; play</a><a href="snake.html">Open game</a>
-</p>
-</article>
-<article class="project project-entry">
-<h2><a href="breakout.html">Breakout</a><span class="project-kind">JavaScript · Game</span>
-</h2>
-<p>A browser version of the classic brick-breaking game. A paddle, a ball, and a screen full of possibilities.
-</p>
-<p class="project-links"><a href="breakout.html">Play Breakout</a>
-</p>
-</article>
+<div class="project-filters" hidden>
+<div class="category-filters" role="group" aria-label="Filter projects by category">
+<button type="button" data-category="All" aria-pressed="true">All</button>
+<button type="button" data-category="Planning" aria-pressed="false">Planning</button>
+<button type="button" data-category="Web Design" aria-pressed="false">Web Design</button>
+<button type="button" data-category="Data Analysis" aria-pressed="false">Data Analysis</button>
+</div>
+<details class="skill-filter-picker"><summary>Filter by skill</summary><div class="skill-filter-options skill-tags" role="group" aria-label="Filter projects by skill"></div></details>
+<div class="filter-feedback"><p class="filter-status" role="status" aria-live="polite"></p><button type="button" class="clear-filters" hidden>Clear filters</button></div>
+</div>
+<section class="project-gallery" aria-label="Projects">
+<details class="project-card" data-categories="Planning">
+<summary><span class="project-preview project-preview-document"><img src="posts/assets/srpedd/srta-preview.jpg" alt="SRTA fare-free transit preview" loading="lazy"></span><span class="project-card-label">SRTA fare-free transit <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="ArcGIS" aria-pressed="false">ArcGIS</button></li><li><button type="button" data-skill="Adobe InDesign" aria-pressed="false">Adobe InDesign</button></li><li><button type="button" data-skill="Cartography" aria-pressed="false">Cartography</button></li><li><button type="button" data-skill="Data Visualization" aria-pressed="false">Data Visualization</button></li></ul><p>An outreach brochure created for an SRTA Fare-Free transit economic analysis study. Pamphlets used during canvassing along bus routes.</p><a href="posts/srta.html">View project ↗</a></div>
+</details>
+<details class="project-card" data-categories="Planning">
+<summary><span class="project-preview project-preview-document"><img src="posts/assets/srpedd/westport-preview.jpg" alt="Westport Village Zoning preview" loading="lazy"></span><span class="project-card-label">Westport Village Zoning <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="ArcGIS" aria-pressed="false">ArcGIS</button></li><li><button type="button" data-skill="Adobe InDesign" aria-pressed="false">Adobe InDesign</button></li><li><button type="button" data-skill="Cartography" aria-pressed="false">Cartography</button></li><li><button type="button" data-skill="Public Engagement" aria-pressed="false">Public Engagement</button></li></ul><p>A poster created for informational tabling at events to support the Westport Village Zoning update project. SRPEDD was contracted to provide a zoning update to allow for mixed-use and commercial development in key areas in town.</p><a href="posts/westport.html">View project ↗</a></div>
+</details>
+<details class="project-card" data-categories="Planning">
+<summary><span class="project-preview project-preview-document"><img src="posts/assets/srpedd/swansea-preview.jpg" alt="Swansea Route 103 preview" loading="lazy"></span><span class="project-card-label">Swansea Route 103 <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="ArcGIS" aria-pressed="false">ArcGIS</button></li><li><button type="button" data-skill="GIS Analysis" aria-pressed="false">GIS Analysis</button></li><li><button type="button" data-skill="Presentation Design" aria-pressed="false">Presentation Design</button></li><li><button type="button" data-skill="Project Management" aria-pressed="false">Project Management</button></li><li><button type="button" data-skill="Public Engagement" aria-pressed="false">Public Engagement</button></li></ul><p>The Route 103 Corridor Study was one of the first projects that I managed from start to finish. The study analyzed opportunities to create a village-style main street along one of the Town's smaller commercial corridors that passes through the densest residential area in town.</p><a href="posts/swansea.html">View project ↗</a></div>
+</details>
+<details class="project-card" data-categories="Data Analysis">
+<summary><span class="project-preview project-preview-document"><img src="posts/assets/research/winter-flounder.jpg" alt="Suitable Habitat Model for Winter Flounder in the Gulf of Maine" loading="lazy"></span><span class="project-card-label">Winter flounder habitat suitability <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="ArcGIS" aria-pressed="false">ArcGIS</button></li><li><button type="button" data-skill="GIS Analysis" aria-pressed="false">GIS Analysis</button></li><li><button type="button" data-skill="Habitat Modeling" aria-pressed="false">Habitat Modeling</button></li><li><button type="button" data-skill="Cartography" aria-pressed="false">Cartography</button></li></ul><p>A habitat suitability map for winter flounder in the Gulf of Maine, combining depth, sediment, slope, and sea surface temperature.</p><a href="posts/winter-flounder.html">View project ↗</a></div>
+</details>
+<details class="project-card" data-categories="Data Analysis">
+<summary><span class="project-preview project-preview-document"><img src="posts/assets/research/sicb-2021-preview.jpg" alt="Diel thermal variability structures algal and microbial symbiont communities in the reef-building coral, Siderastrea siderea" loading="lazy"></span><span class="project-card-label">SICB 2021 research poster <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="R" aria-pressed="false">R</button></li><li><button type="button" data-skill="Data Analysis" aria-pressed="false">Data Analysis</button></li><li><button type="button" data-skill="Data Visualization" aria-pressed="false">Data Visualization</button></li><li><button type="button" data-skill="Scientific Communication" aria-pressed="false">Scientific Communication</button></li></ul><p>A research poster on how daily temperature variability relates to algal and microbial symbiont communities in the reef-building coral Siderastrea siderea.</p><a href="posts/sicb-2021.html">View project ↗</a></div>
+</details>
+<details class="project-card" data-categories="Web Design">
+<summary><span class="project-preview"><iframe src="snake.html" title="Snake game preview" loading="lazy" tabindex="-1" aria-hidden="true" inert></iframe></span><span class="project-card-label">Snake <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="HTML" aria-pressed="false">HTML</button></li><li><button type="button" data-skill="CSS" aria-pressed="false">CSS</button></li><li><button type="button" data-skill="JavaScript" aria-pressed="false">JavaScript</button></li><li><button type="button" data-skill="Canvas" aria-pressed="false">Canvas</button></li></ul><p>A classic snake game. One of the first things I ever scripted.</p><a href="snake.html">Play Snake ↗</a></div>
+</details>
+<details class="project-card" data-categories="Web Design">
+<summary><span class="project-preview"><iframe src="breakout.html" title="Breakout game preview" loading="lazy" tabindex="-1" aria-hidden="true" inert></iframe></span><span class="project-card-label">Breakout <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="HTML" aria-pressed="false">HTML</button></li><li><button type="button" data-skill="CSS" aria-pressed="false">CSS</button></li><li><button type="button" data-skill="JavaScript" aria-pressed="false">JavaScript</button></li><li><button type="button" data-skill="Canvas" aria-pressed="false">Canvas</button></li></ul><p>Another hand-scripted game.</p><a href="breakout.html">Play Breakout ↗</a></div>
+</details>
+<details class="project-card" data-categories="Web Design">
+<summary><span class="project-preview"><iframe src="posts/matrix.html" title="Matrix rain preview" loading="lazy" tabindex="-1" aria-hidden="true" inert></iframe></span><span class="project-card-label">Matrix rain <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="HTML" aria-pressed="false">HTML</button></li><li><button type="button" data-skill="CSS" aria-pressed="false">CSS</button></li><li><button type="button" data-skill="JavaScript" aria-pressed="false">JavaScript</button></li><li><button type="button" data-skill="Canvas" aria-pressed="false">Canvas</button></li><li><button type="button" data-skill="Generative Art" aria-pressed="false">Generative Art</button></li></ul><p>Mostly an art experiment.</p><a href="posts/matrix.html">Open animation ↗</a></div>
+</details>
+<details class="project-card" data-categories="Web Design">
+<summary><span class="project-preview"><iframe src="posts/pixel-art.html" title="Pixel art preview" loading="lazy" tabindex="-1" aria-hidden="true" inert></iframe></span><span class="project-card-label">Pixel art <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="HTML" aria-pressed="false">HTML</button></li><li><button type="button" data-skill="CSS" aria-pressed="false">CSS</button></li><li><button type="button" data-skill="JavaScript" aria-pressed="false">JavaScript</button></li></ul><p>Fun art project. Leave a message!</p><a href="posts/pixel-art.html">Start drawing ↗</a> <a href="https://github.com/0shuvo0/pilex-art">Original source ↗</a></div>
+</details>
+<details class="project-card" data-categories="Web Design">
+<summary><span class="project-preview"><iframe src="posts/cupcake.html" title="Cupcake halftones preview" loading="lazy" tabindex="-1" aria-hidden="true" inert></iframe></span><span class="project-card-label">Cupcake halftones <span class="project-card-hint">Details <span aria-hidden="true">+</span></span></span></summary>
+<div class="project-card-copy"><ul class="skill-tags" aria-label="Project skills"><li><button type="button" data-skill="HTML" aria-pressed="false">HTML</button></li><li><button type="button" data-skill="CSS" aria-pressed="false">CSS</button></li><li><button type="button" data-skill="JavaScript" aria-pressed="false">JavaScript</button></li><li><button type="button" data-skill="Canvas" aria-pressed="false">Canvas</button></li><li><button type="button" data-skill="Image Processing" aria-pressed="false">Image Processing</button></li></ul><p>Took a real photo of a raspberry cupcake I made for a party and rendered into Andy-Warhol-style pixel images.</p><a href="posts/cupcake.html">Explore the experiment ↗</a></div>
+</details>
 </section>
+<p class="filter-empty" hidden>No projects match these filters. Try another skill or clear the filters.</p>
 </main>
 <footer class="home-footer"><span>Laura Tsang</span><span>A small, independent corner of the web.</span><nav class="social-links" aria-label="Contact and social links"><a class="social-link" href="mailto:laura.c.tsang@gmail.com" aria-label="Email Laura" title="Email"><span class="social-icon social-icon-email" aria-hidden="true"></span></a><a class="social-link" href="sms:+18484699152" aria-label="Text Laura" title="Text message"><span class="social-icon social-icon-text" aria-hidden="true"></span></a><a class="social-link" href="https://www.linkedin.com/in/lauratsang/" aria-label="LinkedIn" title="LinkedIn" rel="me"><span class="social-icon social-icon-linkedin" aria-hidden="true"></span></a><a class="social-link" href="https://github.com/lauratsang" aria-label="GitHub" title="GitHub" rel="me"><span class="social-icon social-icon-github" aria-hidden="true"></span></a><a class="social-link" href="https://www.instagram.com/lau.ratheexplora/" aria-label="Instagram" title="Instagram" rel="me"><span class="social-icon social-icon-instagram" aria-hidden="true"></span></a></nav>
 </footer>

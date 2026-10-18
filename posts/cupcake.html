@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>pixelated cupcake</title><meta name=description content="a photo pixelator" />
+  <style>
+    /* Project media styles. */
+    /* img, video, iframe {
+      max-width: 100%;
+      max-height: 400px;
+      flex-shrink: 1;
+      object-fit: contain;
+      object-position: left;
+      image-rendering: pixelated;
+    }
+    iframe {
+      max-height: 800px;
+    } */
+
+    body {
+        margin: 0;
+        /* padding: 20px; */
+        background-color: #fff;
+    }
+
+    #canvasContainer {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        /* margin-top: 20px; */
+    }
+
+    .canvas-wrapper {
+        padding: 3px;
+        background-color: #000;
+        display: inline-block;
+    }
+
+    .canvas {
+        display: block;
+    }
+  </style>
+<style>body{font-family:system-ui,sans-serif} .back-link{display:inline-block;margin:12px;color:inherit;font-size:14px}body{padding:16px}#canvasContainer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.canvas-wrapper{min-width:0}.canvas{width:100%;height:auto}h2{margin:8px 0}</style>
+<link rel="stylesheet" href="../assets/typography.css?v=consistent-2">
+</head>
+<body>
+<a class="back-link" href="../projects.html">← Projects</a>
+
+  
+  <br/>
+  <h2>raspberry cupcake</h2>
+  <br/>
+  
+  <div id="canvasContainer">
+    <div class="canvas-wrapper">
+      <canvas class="canvas" id="canvas1"></canvas>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas class="canvas" id="canvas2"></canvas>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas class="canvas" id="canvas3"></canvas>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas class="canvas" id="canvas4"></canvas>
+    </div>
+  </div>
+
+</body>
+<script>
+const imagePaths = ['assets/cupcake.png'];
+const colorSchemes = [
+    { bg: '#FF006E', dot: '#FFFF00' },  // Hot pink & Yellow
+    { bg: '#00F5FF', dot: '#FF4500' },  // Cyan & Orange-red
+    { bg: '#7B2CBF', dot: '#00FF00' },  // Purple & Lime green
+    { bg: '#FF9500', dot: '#0066FF' }   // Orange & Bright blue
+];
+
+window.onload = function () {
+    colorSchemes.forEach((colors, index) => {
+        const canvas = document.getElementById(`canvas${index + 1}`);
+        loadImageAndDrawDots(canvas, colors);
+    });
+};
+
+function loadImageAndDrawDots(canvas, colors) {
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.src = imagePaths[0];
+
+    img.onload = function () {
+        // Set canvas size
+        const targetWidth = 300;
+        canvas.width = targetWidth;
+        canvas.height = targetWidth;
+
+        // Draw image offscreen to read full data
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = img.width;
+        offCanvas.height = img.height;
+        const offCtx = offCanvas.getContext('2d');
+        offCtx.drawImage(img, 0, 0);
+        const imageData = offCtx.getImageData(0, 0, img.width, img.height);
+        const data = imageData.data;
+
+        // Compute uniform scale to preserve aspect ratio
+        const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+        const newWidth = img.width * scale;
+        const newHeight = img.height * scale;
+        const dx = (canvas.width - newWidth) / 2;
+        const dy = (canvas.height - newHeight) / 2;
+
+        // Generate dots
+        const dots = [];
+        const space = 8;
+        for (let y = 0; y < img.height; y += space) {
+            for (let x = 0; x < img.width; x += space) {
+                const index = (y * img.width + x) * 4;
+                const red = data[index];
+                const green = data[index + 1];
+                const blue = data[index + 2];
+                const brightness = (red + green + blue) / 3;
+
+                if (brightness > 0.7 * 255) continue;
+
+                const dotSize = Math.max(2, 6 - (brightness / 255) * 6);
+
+                dots.push({
+                    x: x * scale + dx,
+                    y: y * scale + dy,
+                    size: dotSize * scale * 0.8
+                });
+            }
+        }
+
+        // Draw background
+        ctx.fillStyle = colors.bg;
+        ctx.fillRect(dx, dy, newWidth, newHeight);
+
+        // Draw dots
+        dots.forEach(dot => {
+            ctx.fillStyle = colors.dot;
+            ctx.beginPath();
+            ctx.arc(dot.x, dot.y, dot.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    };
+}
+</script>
+
+</html>

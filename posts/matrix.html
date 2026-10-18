@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>matrix background</title><meta name=description content="matrix background" />
+  <style>
+    /* Project media styles. */
+    img, video, iframe {
+      max-width: 100%;
+      max-height: 200px;
+      flex-shrink: 1;
+      object-fit: contain;
+      object-position: left;
+      image-rendering: pixelated;
+    }
+    iframe {
+      max-height: 800px;
+    }
+    *{
+        margin: 0;
+        padding: 0;
+    }
+            
+    body {
+        background: #EFEBE7;
+        color: black;
+    }
+    canvas {display:block;}
+  </style>
+<style>body{font-family:system-ui,sans-serif} .back-link{display:inline-block;margin:12px;color:inherit;font-size:14px}</style>
+<link rel="stylesheet" href="../assets/typography.css?v=consistent-2">
+</head>
+<body>
+<a class="back-link" href="../projects.html">← Projects</a>
+  
+  <br/>
+
+    <canvas id="c"></canvas>
+
+</body>
+<script>
+    var c = document.getElementById("c");
+    var ctx = c.getContext("2d");
+
+    //making the canvas full screen
+    c.height = window.innerHeight;
+    c.width = window.innerWidth;
+
+    //characters - taken from the unicode charset
+    var matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+    //converting the string into an array of single characters
+    matrix = matrix.split("");
+
+    var font_size = 8;
+    var columns = c.width / font_size; //number of columns for the rain
+    //an array of drops - one per column
+    var drops = [];
+    //x below is the x coordinate
+    //1 = y coordinate of the drop(same for every drop initially)
+    for (var x = 0; x < columns; x++)
+        drops[x] = 1; 
+
+    //drawing the characters
+    function darkColor() {
+      const hue = Math.floor(Math.random() * 360); // full hue spectrum
+      const saturation = 90 + Math.random() * 10;  // 90–100%
+      const lightness = 30 + Math.random() * 10;   // 30–40% (dark + rich)
+      return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    }
+
+    // function pastelColor() {
+    //   const hue = Math.floor(Math.random() * 360); // full hue spectrum
+    //   const saturation = 70 + Math.random() * 10;  // 70–80%
+    //   const lightness = 60 + Math.random() * 10;   // 60–70% (light + soft)
+    //   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    // }
+
+    function draw() {
+        ctx.fillStyle = "rgba(239, 235, 231, 0.05)";
+        ctx.fillRect(0, 0, c.width, c.height);
+
+        ctx.fillStyle = darkColor(); //text color
+        ctx.font = font_size + "px monospace";
+        //looping over drops
+        for (var i = 0; i < drops.length; i++) {
+            //a random character to print
+            var text = matrix[Math.floor(Math.random() * matrix.length)];
+            //x = i*font_size, y = value of drops[i]*font_size
+            ctx.fillText(text, i * font_size, drops[i] * font_size);
+
+            //sending the drop back to the top randomly after it has crossed the screen
+            //adding a randomness to the reset to make the drops scattered on the Y axis
+            if (drops[i] * font_size > c.height && Math.random() > 0.975)
+                drops[i] = 0;
+
+            //incrementing Y coordinate
+            drops[i]++;
+        }
+    }
+
+    setInterval(draw, 33);
+</script>
+</html>
